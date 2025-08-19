@@ -51,6 +51,34 @@
                 Looking for your next galactic ride?
                 <a href="#" class="underline font-semibold">Browse the {{ ships|length * 10 }} starships for sale!</a>
             </p>
+
+            <div>
+                <h2 class="text-4xl font-semibold my-8">ISS Location</h2>
+                {% if issData is not empty %}
+                    <p>Time: <span id="iss-time" data-timestamp="{{ issData.timestamp }}">Calculating local time...</span></p>
+                    <p>Altitude: {{ issData.altitude|number_format(2, '.', ',') }} km</p>
+                    <p>Latitude: {{ issData.latitude }}</p>
+                    <p>Longitude: {{ issData.longitude }}</p>
+                    <p>Visibility: {{ issData.visibility }}</p>
+                {% else %}
+                    <p class="text-red-500">ISS data is currently unavailable.</p>
+                {% endif %}
+            </div>
         </div>
     </main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const issTimeElement = document.getElementById('iss-time');
+            if (issTimeElement) {
+                const timestamp = parseInt(issTimeElement.getAttribute('data-timestamp'), 10);
+                const date = new Date(timestamp * 1000);
+                const localTimeString = date.toLocaleString();
+                issTimeElement.textContent = localTimeString;
+            }
+        });
+    </script>
 {% endblock %}
