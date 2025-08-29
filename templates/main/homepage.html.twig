@@ -52,6 +52,7 @@
                 <a href="#" class="underline font-semibold">Browse the {{ ships|length * 10 }} starships for sale!</a>
             </p>
 
+            {% set issData = get_iss_location_data() %}
             <div>
                 <h2 class="text-4xl font-semibold my-8">ISS Location</h2>
                 {% if issData is not empty %}
