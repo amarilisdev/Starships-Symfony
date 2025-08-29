@@ -55,7 +55,7 @@
             <div>
                 <h2 class="text-4xl font-semibold my-8">ISS Location</h2>
                 {% if issData is not empty %}
-                    <p>Time: <span id="iss-time" data-timestamp="{{ issData.timestamp }}">Calculating local time...</span></p>
+                    <p>Updated At: {{ issData.timestamp|date }}</p>
                     <p>Altitude: {{ issData.altitude|number_format(2, '.', ',') }} km</p>
                     <p>Latitude: {{ issData.latitude }}</p>
                     <p>Longitude: {{ issData.longitude }}</p>
